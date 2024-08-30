@@ -88,9 +88,13 @@ This project is a full-stack application with a backend powered by Node.js, Expr
 
     This command will use `concurrently` to run both the frontend and backend servers simultaneously. The backend GraphQL API will be available at `http://localhost:your_preferred_port/graphql`, and the React application will be available at `http://localhost:5173`.
 
-## Video Tutorial
+## Video Tutorial and Acknowledgements
 
 This project follows along with the YouTube video tutorial: [GraphQL Crash Course With Full Stack MERN Project](https://youtu.be/BcLNfwF04Kw?si=TRLK7VTRBckWpkaK). Make sure to check out the video for detailed instructions and explanations.
+
+You can find the original repository by [Brad Traversy](https://github.com/bradtraversy/project-mgmt-graphql). Thank you for providing the foundational work that this project builds upon.
+
+
 
 ## License
 
