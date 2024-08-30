@@ -6,7 +6,7 @@ import { Popconfirm, message } from "antd";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GET_CLIENTS } from "../queries/clientQueries";
-
+import { GET_PROJECTS } from "../queries/projectQueries";
 const ClientRow = ({ client }) => {
   const [deleteClient] = useMutation(DELETE_CLIENT, {
     variables: { id: client.id },
@@ -16,13 +16,21 @@ const ClientRow = ({ client }) => {
     onError: (error) => {
       toast.error(`Error deleting client: ${error.message}`);
     },
-    update(cache, { data: { deleteClient } }) {
-      const { clients } = cache.readQuery({ query: GET_CLIENTS });
-      cache.writeQuery({
-        query: GET_CLIENTS,
-        data: { clients: clients.filter((c) => c.id !== deleteClient.id) },
-      });
-    },
+    refetchQueries: [{ query: GET_CLIENTS }, { query: GET_PROJECTS }],
+
+    
+    // update(cache, { data: { deleteClient } }) {
+    //   const { clients } = cache.readQuery({ query: GET_CLIENTS });
+    //   cache.writeQuery({
+    //     query: GET_CLIENTS,
+    //     data: { clients: clients.filter((c) => c.id !== deleteClient.id) },
+    //   });
+    //   const { projects } = cache.readQuery({ query: GET_PROJECTS });
+    //   cache.writeQuery({
+    //     query: GET_PROJECTS,
+    //     data: { projects: projects.filter((p) => p.clientId !== deleteClient.id) },
+    //   });
+    // }
   });
 
   const confirmDelete = () => {

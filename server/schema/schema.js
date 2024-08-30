@@ -98,10 +98,28 @@ const mutaions = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args) {
-        return Client.findByIdAndDelete(args.id);
+      async resolve(parent, args) {
+        try {
+          // Find all projects associated with the client
+          const projects = await Project.find({ clientId: args.id });
+          
+          // Delete all associated projects
+          await Promise.all(projects.map(project => project.deleteOne()));
+    
+          // Delete the client
+          const deletedClient = await Client.findByIdAndDelete(args.id);
+          
+          if (!deletedClient) {
+            throw new Error('Client not found');
+          }
+          
+          return deletedClient;
+        } catch (err) {
+          throw new Error('Error deleting client and associated projects: ' + err.message);
+        }
       },
     },
+    
 
     // update client
     updateClient: {
