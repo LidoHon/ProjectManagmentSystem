@@ -23,10 +23,9 @@ This project is a full-stack application with a backend powered by Node.js, Expr
 1. **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/your-username/your-repo.git](https://github.com/LidoHon/ProjectManagmentSystem.git)
-    cd your-repo
+    git clone https://github.com/LidoHon/ProjectManagmentSystem.git
+    cd ProjectManagmentSystem
     ```
-
 2. **Navigate to the backend directory:**
 
     ```bash
